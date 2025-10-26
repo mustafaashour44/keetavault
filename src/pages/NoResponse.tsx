@@ -2,12 +2,12 @@ import PageLayout from "@/components/PageLayout";
 import MessageBox from "@/components/MessageBox";
 
 const NoResponse = () => {
-  const messages = Array(4).fill(null).map((_, index) => {
-    if (index >= 2) {
-      return { hasCategory: true };
-    }
-    return { hasCategory: false };
-  });
+  const messages = [
+    { text: "مرحبًا! لم نتلق ردك بعد، وسيتم إغلاق المحادثة قريبًا. إذا كان عندك أي استفسار آخر، فلا تتردد في التواصل معنا. شكرًا لك", hasCategory: false },
+    { text: "Hello! We still have not received your response, our conversation will be closed very soon. If you have further inquiry please feel free to contact us. Thank you", hasCategory: false },
+    { text: "مرحبا عميلنا العزيز سيتم تعويضك تلقائيا على (طريقة دفعك الأصلية) وذلك لانه لم اتلقى منك رد وسيتم إغلاق المحادثة قريبًا. إذا كان عندك أي استفسار آخر، فلا تتردد في التواصل معنا. شكرًا لك", hasCategory: true },
+    { text: "Hello dear customer, you will be automatically compensated through your (primary payment method) as I haven't received a response from you. The conversation will be closed soon. If you have any further inquiries, feel free to reach out to us. Thank you!", hasCategory: true },
+  ];
 
   return (
     <PageLayout
@@ -17,9 +17,8 @@ const NoResponse = () => {
       {messages.map((message, index) => (
         <MessageBox 
           key={index} 
-          text="" 
-          isEmpty={true}
-          category={message.hasCategory ? "Purpose/Category" : undefined}
+          text={message.text}
+          category={message.hasCategory ? "" : undefined}
         />
       ))}
     </PageLayout>

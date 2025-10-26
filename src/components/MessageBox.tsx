@@ -30,7 +30,7 @@ const MessageBox = ({ text, category, isEmpty = false }: MessageBoxProps) => {
       <p 
         className={`text-sm leading-relaxed select-all ${
           isEmpty ? "text-muted-foreground italic" : "text-card-foreground"
-        }`}
+        } ${!isEmpty ? "pr-12" : ""}`}
         dir="auto"
       >
         {isEmpty ? "Click to edit and add your message" : text}
