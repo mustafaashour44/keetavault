@@ -12,10 +12,7 @@ const Compensation = () => {
   ];
 
   return (
-    <PageLayout
-      title="Compensation Messages"
-      description="Compensation offer templates"
-    >
+    <PageLayout title="Compensation Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

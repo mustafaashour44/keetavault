@@ -10,10 +10,7 @@ const NoResponse = () => {
   ];
 
   return (
-    <PageLayout
-      title="No Response Messages"
-      description="Messages for when customers don't respond"
-    >
+    <PageLayout title="No Response Messages">
       {messages.map((message, index) => (
         <MessageBox 
           key={index} 

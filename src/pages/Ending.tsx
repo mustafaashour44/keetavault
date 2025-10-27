@@ -8,10 +8,7 @@ const Ending = () => {
   ];
 
   return (
-    <PageLayout
-      title="Ending Messages"
-      description="Conversation closing templates"
-    >
+    <PageLayout title="Ending Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

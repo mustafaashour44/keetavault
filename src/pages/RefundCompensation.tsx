@@ -22,10 +22,7 @@ const RefundCompensation = () => {
   ];
 
   return (
-    <PageLayout
-      title="Refund + Compensation Messages"
-      description="Combined refund and compensation templates"
-    >
+    <PageLayout title="Refund + Compensation Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

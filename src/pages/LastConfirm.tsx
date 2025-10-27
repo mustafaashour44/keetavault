@@ -12,10 +12,7 @@ const LastConfirm = () => {
   ];
 
   return (
-    <PageLayout
-      title="Last Confirm Messages"
-      description="Final confirmation templates"
-    >
+    <PageLayout title="Last Confirm Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

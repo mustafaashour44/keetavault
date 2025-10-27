@@ -30,10 +30,7 @@ const Hold = () => {
   ];
 
   return (
-    <PageLayout
-      title="Hold Messages"
-      description="Messages for when you need time to investigate"
-    >
+    <PageLayout title="Hold Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message.text} category={message.category} />
       ))}

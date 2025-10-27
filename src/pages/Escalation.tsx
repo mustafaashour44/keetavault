@@ -12,10 +12,7 @@ const Escalation = () => {
   ];
 
   return (
-    <PageLayout
-      title="Outbound + Escalation Messages"
-      description="Templates for escalating issues"
-    >
+    <PageLayout title="Outbound + Escalation Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

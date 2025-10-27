@@ -10,10 +10,7 @@ const Refund = () => {
   ];
 
   return (
-    <PageLayout
-      title="Refund Messages"
-      description="Refund process templates"
-    >
+    <PageLayout title="Refund Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

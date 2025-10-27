@@ -12,10 +12,7 @@ const Greeting = () => {
   ];
 
   return (
-    <PageLayout
-      title="Greeting Messages"
-      description="Add your greeting messages below"
-    >
+    <PageLayout title="Greeting Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

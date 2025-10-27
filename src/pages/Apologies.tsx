@@ -94,10 +94,7 @@ const Apologies = () => {
   ];
 
   return (
-    <PageLayout
-      title="Apologies Messages"
-      description="Apology templates for various situations"
-    >
+    <PageLayout title="Apologies Messages">
       {messages.map((message, index) => (
         <MessageBox 
           key={index} 

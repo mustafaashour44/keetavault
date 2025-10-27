@@ -8,10 +8,7 @@ const Confirming = () => {
   ];
 
   return (
-    <PageLayout
-      title="Confirming Messages"
-      description="Order confirmation messages"
-    >
+    <PageLayout title="Confirming Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message} />
       ))}

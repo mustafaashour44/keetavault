@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface PageLayoutProps {
   title: string;
-  description: string;
+  description?: string;
   children: ReactNode;
 }
 
@@ -12,7 +12,7 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
       <div className="max-w-5xl mx-auto p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">{title}</h1>
-          <p className="text-muted-foreground">{description}</p>
+          {description && <p className="text-muted-foreground">{description}</p>}
         </div>
         
         <div className="space-y-4">

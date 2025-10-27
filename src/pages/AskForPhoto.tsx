@@ -16,10 +16,7 @@ const AskForPhoto = () => {
   ];
 
   return (
-    <PageLayout
-      title="Ask for Photo Messages"
-      description="Add your photo request messages below"
-    >
+    <PageLayout title="Ask for Photo Messages">
       {messages.map((message, index) => (
         <MessageBox key={index} text={message.text} category={message.category} />
       ))}
