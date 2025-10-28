@@ -1,8 +1,14 @@
+import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import MessageBox from "@/components/MessageBox";
+import CategoryBox from "@/components/CategoryBox";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const Hold = () => {
-  const messages = [
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const hold1MinMessages = [
     { text: "ممكن دقيقة من فضلك عشان أشيك لك على الموضوع؟ شكراً على صبرك." },
     { text: "Could you please give me a minute to check on this for you? Thank you for your patience." },
     { text: "أحتاج إلى دقيقة إضافية لإنهاء العمل المطلوب، وأقدّر تفهمك." },
@@ -23,19 +29,61 @@ const Hold = () => {
     { text: "I need an extra minute now, and if the matter is not completed, I may request additional time later." },
     { text: "أحتاج إلى دقيقة أخرى لاستكمال العمل على أكمل وجه، واشكرك على تعاونك." },
     { text: "I need another minute to complete the task properly, and I appreciate your cooperation." },
+  ];
+
+  const holdCallMessages = [
     { text: "ممكن تعطيني دقيقتين - ثلاث دقائق لاتواصل مع السائق ؟ شكرا لتفهمك وصبرك.", category: "الانتظار لإجراء مكالمة مع السائق" },
     { text: "Could you please give me 2–3 minutes to contact the rider ? Thank you for your understanding and patience.", category: "Hold to call rider" },
     { text: "ممكن تعطيني دقيقتين - ثلاث دقائق لاتواصل مع المطعم ؟ شكرا لتفهمك وصبرك.", category: "الانتظار لإجراء مكالمة مع المطعم" },
     { text: "Could you please give me 2–3 minutes to contact the merchant ? Thank you for your understanding and patience.", category: "Hold to call merchant" },
   ];
 
-  return (
-    <PageLayout title="Hold Messages">
-      {messages.map((message, index) => (
-        <MessageBox key={index} text={message.text} category={message.category} />
-      ))}
-    </PageLayout>
-  );
+  const renderContent = () => {
+    if (selectedCategory === "hold1min") {
+      return (
+        <>
+          <Button
+            variant="outline"
+            onClick={() => setSelectedCategory(null)}
+            className="mb-4"
+          >
+            <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+            Back
+          </Button>
+          {hold1MinMessages.map((message, index) => (
+            <MessageBox key={index} text={message.text} />
+          ))}
+        </>
+      );
+    }
+
+    if (selectedCategory === "holdcall") {
+      return (
+        <>
+          <Button
+            variant="outline"
+            onClick={() => setSelectedCategory(null)}
+            className="mb-4"
+          >
+            <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+            Back
+          </Button>
+          {holdCallMessages.map((message, index) => (
+            <MessageBox key={index} text={message.text} category={message.category} />
+          ))}
+        </>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        <CategoryBox title="Hold 1 Min" onClick={() => setSelectedCategory("hold1min")} />
+        <CategoryBox title="Hold call" onClick={() => setSelectedCategory("holdcall")} />
+      </div>
+    );
+  };
+
+  return <PageLayout title="Hold Messages">{renderContent()}</PageLayout>;
 };
 
 export default Hold;
