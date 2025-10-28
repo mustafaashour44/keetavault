@@ -47,13 +47,13 @@ const Apologies = () => {
     { text: "I want you to know that we take your feedback seriously. I apologize for any inconvenience you have experienced, and we are here to work on making your future experiences better, God willing." },
     { text: "يضيق صدرنا نسمع كذا منك، خصوصًا إنك من عملائنا المميزين، وما نبي أبدًا نخسرك بسبب أي خطأ. نتمنى تظل معانا دايمًا، وحنا مستعدين نخدمك في المستقبل بأفضل طريقة ممكنة ان شاء الله." },
     { text: "It truly saddens us to hear this from you, especially since you are one of our valued customers, and we absolutely don't want to lose you over any mistake. We hope you'll always stay with us, and we're ready to serve you anytime you need us." },
+  ];
+
+  const fullApologies = [
     { text: "نعتذر من أعماق قلبنا عن أي إزعاج قد تسببت به تجربتك، ونحن نقدر تماماً مشاعرك. نحن نأخذ ملاحظاتك بكل جدية ونعمل جاهدين على نقلها إلى المطعم لتحسين الخدمة وتقديم الأفضل دائمًا. هدفنا هو أن نمنحك تجربة استثنائية تتناسب مع توقعاتك وتفوقها في المستقبل. نحن نسعى دائماً لإرضائك، ونتمنى أن نتمكن من استعادة ثقتك الغالية فينا. شكراً لك على دعمك وصبرك، وسنواصل العمل بجد ليكون مستوى تجربتك القادمة أفضل إن شاء الله." },
     { text: "We sincerely apologize for any inconvenience your experience may have caused, and we deeply value your feelings. We take your feedback very seriously and are working hard to pass it on to the restaurant to improve the service and provide the best at all times. Our aim is to offer you an exceptional experience that meets and exceeds your expectations in the future. We always strive to satisfy you, and we hope to regain your valuable trust in us. Thank you for your support and patience, and we will continue working hard so that your next experience will be at a better level, God willing." },
     { text: "نعتذر بصدق عن أي إزعاج قد تسببت به تجربتك معنا، ونقدر ملاحظاتك التي تساعدنا في التحسين. سيتم نقلها إلى المطعم للمساهمة في تقديم خدمة أفضل إن شاء الله. هدفنا هو أن نمنحك تجربة مميزة، ونسعى جاهدين لاستعادة ثقتك بنا. شكرًا لصبرك ودعمك، ونتطلع إلى خدمتك مجددًا بتجربة أفضل." },
     { text: "We sincerely apologize for any inconvenience your experience with us may have caused, and we truly value your feedback that helps us improve. It will be shared with the restaurant to contribute to providing better service, God willing. Our aim is to offer you a special experience that exceeds your expectations, and we strive to regain your trust. Thank you for your patience and support, and we look forward to serving you again with an even better experience." },
-  ];
-
-  const fullApologies = [
     { text: "نأسف لعدم تلبية توقعاتك هذه المرة، ونشكرك على إبلاغنا بملاحظاتك. نأخذ كل الملاحظات على محمل الجد ونعمل على تحسين خدماتنا باستمرار. نأمل أن تمنحنا فرصة أخرى لنقدم لك تجربة تفوق تطلعاتك في المستقبل." },
     { text: "We truly apologize if your experience did not meet your expectations. Customer satisfaction is at the heart of what we do, and we are constantly working on refining our service. We hope to have the opportunity to serve you again under better circumstances." },
     { text: "نحن آسفون لأن تجربتك لم تكن بالمستوى الذي نطمح إليه. نقدر ملاحظاتك ونعمل باستمرار على تطوير الخدمة. شكراً على تفهمك، ونتمنى أن نراك قريبًا بتجربة أكثر تميزًا" },
@@ -178,7 +178,7 @@ const Apologies = () => {
     }
 
     return (
-      <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
         <CategoryBox title="Basic apologies" onClick={() => setSelectedCategory("basic")} />
         <CategoryBox title="Special case apologies" onClick={() => setSelectedCategory("special")} />
         <CategoryBox title="Handling the customer" onClick={() => setSelectedCategory("handling")} />
