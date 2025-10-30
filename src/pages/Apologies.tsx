@@ -178,7 +178,7 @@ const Apologies = () => {
     }
 
     return (
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
         <CategoryBox title="Basic apologies" onClick={() => setSelectedCategory("basic")} />
         <CategoryBox title="Special case apologies" onClick={() => setSelectedCategory("special")} />
         <CategoryBox title="Handling the customer" onClick={() => setSelectedCategory("handling")} />

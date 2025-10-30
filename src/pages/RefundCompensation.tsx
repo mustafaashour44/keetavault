@@ -68,16 +68,16 @@ const RefundCompensation = () => {
     }
 
     return (
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
         <CategoryBox title="Refund + Compensation" onClick={() => setSelectedCategory("refundcomp")} />
-        <CategoryBox title="Rules Refund + Compensation" onClick={() => setSelectedCategory("rules")} />
+        <CategoryBox title="Refund + Compensation Rules" onClick={() => setSelectedCategory("rules")} />
       </div>
     );
   };
 
   const getTitle = () => {
     if (selectedCategory === "refundcomp") return "Refund + Compensation";
-    if (selectedCategory === "rules") return "Rules Refund + Compensation";
+    if (selectedCategory === "rules") return "Refund + Compensation Rules";
     return "Refund + Compensation Messages";
   };
 
