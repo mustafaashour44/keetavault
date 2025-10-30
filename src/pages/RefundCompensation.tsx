@@ -68,14 +68,20 @@ const RefundCompensation = () => {
     }
 
     return (
-      <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
         <CategoryBox title="Refund + Compensation" onClick={() => setSelectedCategory("refundcomp")} />
         <CategoryBox title="Rules Refund + Compensation" onClick={() => setSelectedCategory("rules")} />
       </div>
     );
   };
 
-  return <PageLayout title="Refund + Compensation Messages">{renderContent()}</PageLayout>;
+  const getTitle = () => {
+    if (selectedCategory === "refundcomp") return "Refund + Compensation";
+    if (selectedCategory === "rules") return "Rules Refund + Compensation";
+    return "Refund + Compensation Messages";
+  };
+
+  return <PageLayout title={getTitle()}>{renderContent()}</PageLayout>;
 };
 
 export default RefundCompensation;

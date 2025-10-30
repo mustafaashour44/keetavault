@@ -76,14 +76,20 @@ const Hold = () => {
     }
 
     return (
-      <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
         <CategoryBox title="Hold 1 Min" onClick={() => setSelectedCategory("hold1min")} />
         <CategoryBox title="Hold call" onClick={() => setSelectedCategory("holdcall")} />
       </div>
     );
   };
 
-  return <PageLayout title="Hold Messages">{renderContent()}</PageLayout>;
+  const getTitle = () => {
+    if (selectedCategory === "hold1min") return "Hold 1 Min";
+    if (selectedCategory === "holdcall") return "Hold call";
+    return "Hold Messages";
+  };
+
+  return <PageLayout title={getTitle()}>{renderContent()}</PageLayout>;
 };
 
 export default Hold;

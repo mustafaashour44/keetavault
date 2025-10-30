@@ -187,7 +187,15 @@ const Apologies = () => {
     );
   };
 
-  return <PageLayout title="Apologies Messages">{renderContent()}</PageLayout>;
+  const getTitle = () => {
+    if (selectedCategory === "basic") return "Basic apologies";
+    if (selectedCategory === "special") return "Special case apologies";
+    if (selectedCategory === "handling") return "Handling the customer";
+    if (selectedCategory === "full") return "Full apologies";
+    return "Apologies Messages";
+  };
+
+  return <PageLayout title={getTitle()}>{renderContent()}</PageLayout>;
 };
 
 export default Apologies;
