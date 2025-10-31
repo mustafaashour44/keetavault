@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Calculator, MessageSquare, CheckCircle, Clock, Camera, MessageCircle, DollarSign, RefreshCw, TrendingUp, AlertCircle, UserCheck, LogOut } from "lucide-react";
+import { Calculator, MessageSquare, CheckCircle, Clock, Camera, MessageCircle, DollarSign, RefreshCw, TrendingUp, AlertCircle, UserCheck, LogOut, Home } from "lucide-react";
 
 const Sidebar = () => {
   const location = useLocation();
   
   const menuItems = [
+    { path: "/main-interface", icon: Home, label: "Main Interface" },
     { path: "/", icon: Calculator, label: "Calculator" },
     { path: "/greeting", icon: MessageSquare, label: "Greeting" },
     { path: "/confirming", icon: CheckCircle, label: "Confirming" },
