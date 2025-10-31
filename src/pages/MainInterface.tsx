@@ -68,6 +68,23 @@ const MainInterface = () => {
     setTargetText(sourceText);
   };
 
+  const handleCopyText = (text: string) => {
+    if (!text.trim()) return;
+    
+    navigator.clipboard.writeText(text).then(() => {
+      toast({
+        title: "تم النسخ / Copied",
+        description: "النص منسوخ للحافظة / Text copied to clipboard",
+      });
+    }).catch(() => {
+      toast({
+        title: "خطأ / Error",
+        description: "فشل نسخ النص / Failed to copy text",
+        variant: "destructive",
+      });
+    });
+  };
+
   const systemLinks = [
     { name: "CSMENA System", url: "https://cstickets.csmena.com/csmenahrms/Odoo/signin.php" },
     { name: "SOP/KB", url: "https://km.sankuai.com/collabpage/2424345262" },
@@ -97,8 +114,10 @@ const MainInterface = () => {
             <Textarea
               value={sourceText}
               onChange={(e) => setSourceText(e.target.value)}
+              onClick={() => handleCopyText(sourceText)}
               placeholder={sourceLang === "ar" ? "إدخال نص..." : "Enter text..."}
-              className="min-h-[150px] resize-none"
+              className="min-h-[150px] resize-none cursor-pointer"
+              title="انقر للنسخ / Click to copy"
             />
           </div>
 
@@ -133,8 +152,10 @@ const MainInterface = () => {
             <Textarea
               value={targetText}
               readOnly
+              onClick={() => handleCopyText(targetText)}
               placeholder={targetLang === "ar" ? "الترجمة..." : "Translation..."}
-              className="min-h-[150px] resize-none bg-muted/30"
+              className="min-h-[150px] resize-none bg-muted/30 cursor-pointer"
+              title="انقر للنسخ / Click to copy"
             />
           </div>
         </div>
