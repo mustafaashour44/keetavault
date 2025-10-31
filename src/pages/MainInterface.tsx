@@ -2,54 +2,63 @@ import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeftRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowLeftRight, ExternalLink, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const MainInterface = () => {
   const [sourceText, setSourceText] = useState("");
   const [targetText, setTargetText] = useState("");
   const [sourceLang, setSourceLang] = useState("ar");
   const [targetLang, setTargetLang] = useState("en");
-
-  // Dictionary for custom translations
-  const customDictionary: { [key: string]: { [key: string]: string } } = {
-    ar: {
-      "عميل": "Customer",
-      "العميل": "Customer",
-      "مطعم": "Merchant",
-      "المطعم": "Merchant",
-      "سائق": "Rider",
-      "السائق": "Rider",
-    },
-    en: {
-      "customer": "عميل",
-      "merchant": "مطعم",
-      "rider": "سائق",
-    }
-  };
-
-  const handleTranslate = () => {
-    if (!sourceText.trim()) {
-      setTargetText("");
-      return;
-    }
-
-    let translated = sourceText;
-    const dict = customDictionary[sourceLang] || {};
-    
-    // Apply custom dictionary replacements
-    Object.entries(dict).forEach(([key, value]) => {
-      const regex = new RegExp(`\\b${key}\\b`, 'gi');
-      translated = translated.replace(regex, value);
-    });
-
-    setTargetText(translated);
-  };
+  const [isTranslating, setIsTranslating] = useState(false);
+  const { toast } = useToast();
 
   // Auto-translate when source text or languages change
   useEffect(() => {
-    handleTranslate();
+    const translateText = async () => {
+      if (!sourceText.trim()) {
+        setTargetText("");
+        return;
+      }
+
+      setIsTranslating(true);
+      try {
+        const { data, error } = await supabase.functions.invoke("translate", {
+          body: {
+            text: sourceText,
+            sourceLang,
+            targetLang,
+          },
+        });
+
+        if (error) {
+          console.error("Translation error:", error);
+          toast({
+            title: "Translation Error",
+            description: "Failed to translate text. Please try again.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        setTargetText(data.translatedText);
+      } catch (error) {
+        console.error("Translation error:", error);
+        toast({
+          title: "Translation Error",
+          description: "An unexpected error occurred.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsTranslating(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(translateText, 500);
+    return () => clearTimeout(debounceTimer);
   }, [sourceText, sourceLang, targetLang]);
 
   const handleSwapLanguages = () => {
@@ -99,9 +108,14 @@ const MainInterface = () => {
               variant="outline"
               size="icon"
               onClick={handleSwapLanguages}
+              disabled={isTranslating}
               className="rounded-full"
             >
-              <ArrowLeftRight className="h-4 w-4" />
+              {isTranslating ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <ArrowLeftRight className="h-4 w-4" />
+              )}
             </Button>
           </div>
 
