@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeftRight, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const MainInterface = () => {
   const [sourceText, setSourceText] = useState("");
@@ -19,14 +19,12 @@ const MainInterface = () => {
       "العميل": "Customer",
       "مطعم": "Merchant",
       "المطعم": "Merchant",
-      "كيتا": "Keeta",
       "سائق": "Rider",
       "السائق": "Rider",
     },
     en: {
       "customer": "عميل",
       "merchant": "مطعم",
-      "keeta": "كيتا",
       "rider": "سائق",
     }
   };
@@ -42,12 +40,17 @@ const MainInterface = () => {
     
     // Apply custom dictionary replacements
     Object.entries(dict).forEach(([key, value]) => {
-      const regex = new RegExp(key, 'gi');
+      const regex = new RegExp(`\\b${key}\\b`, 'gi');
       translated = translated.replace(regex, value);
     });
 
     setTargetText(translated);
   };
+
+  // Auto-translate when source text or languages change
+  useEffect(() => {
+    handleTranslate();
+  }, [sourceText, sourceLang, targetLang]);
 
   const handleSwapLanguages = () => {
     setSourceLang(targetLang);
@@ -121,10 +124,6 @@ const MainInterface = () => {
             />
           </div>
         </div>
-
-        <Button onClick={handleTranslate} className="mt-4 w-full">
-          ترجمة / Translate
-        </Button>
       </Card>
 
       {/* System Links Section */}
