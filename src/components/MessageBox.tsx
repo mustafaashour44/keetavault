@@ -5,9 +5,10 @@ interface MessageBoxProps {
   text: string;
   category?: string;
   isEmpty?: boolean;
+  number?: number;
 }
 
-const MessageBox = ({ text, category, isEmpty = false }: MessageBoxProps) => {
+const MessageBox = ({ text, category, isEmpty = false, number }: MessageBoxProps) => {
   const handleCopy = () => {
     if (!isEmpty) {
       navigator.clipboard.writeText(text);
@@ -19,11 +20,18 @@ const MessageBox = ({ text, category, isEmpty = false }: MessageBoxProps) => {
 
   return (
     <div className="relative bg-card border border-border rounded-lg p-4 hover:border-primary/30 transition-colors">
-      {category && (
-        <div className="mb-3">
-          <span className="inline-block text-xs font-medium text-muted-foreground bg-muted px-2.5 py-1 rounded">
-            {category}
-          </span>
+      {(category || number) && (
+        <div className="mb-3 flex items-center gap-2">
+          {number && (
+            <span className="inline-block text-xs font-bold text-primary bg-primary/10 px-2.5 py-1 rounded">
+              {number}
+            </span>
+          )}
+          {category && (
+            <span className="inline-block text-xs font-medium text-muted-foreground bg-muted px-2.5 py-1 rounded">
+              {category}
+            </span>
+          )}
         </div>
       )}
       

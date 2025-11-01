@@ -104,6 +104,23 @@ const Apologies = () => {
     { text: "We fully understand that you expected a better experience, and we are sorry that we did not meet your expectations this time. We appreciate your patience and feedback, which help us improve, and we continuously work to enhance the service to make it smoother and of higher quality, God willing. We hope you give us another opportunity to show that we deserve your trust, and we look forward to your next experience with us being more comfortable and satisfying." },
   ];
 
+  const purpleApologies = [
+    { text: "لتوفير بيئة استهلاك صحية وعالية الجودة للمستهلكين وضمان وصول متساوٍ إلى العروض الترويجية، سنفرض بعض القيود على السلوكيات غير الطبيعية مثل مشاركة الحساب، تقديم الطلبات بشكل متتالٍ، أو الإلغاء المتكرر للطلبات خلال العملية الخارجية، وذلك لحماية حقوق ومصالح المستهلكين والتجار." },
+    { text: "To provide consumers a healthy and high-quality consumption environment and equal access to preferential activities, we will impose certain restrictions on abnormal behaviors such as account sharing, consecutive order placing, or frequent order cancellations during the external process to protect the rights and interests of consumers and merchants." },
+    { text: "نقترح عليك مراجعة ما إذا كنت قد واجهت مواقف مماثلة أثناء استخدامك لخدمة كيتا للتوصيل من قبل. سنقوم أيضًا بإرسال حسابك للمراجعة، وقد يستغرق ذلك بعض الوقت. إذا كنت بحاجة إلى وجبة بشكل عاجل، يُفضل استخدام رقم هاتف أو حساب آخر، أو الطلب مع الأصدقاء لتجنب التأثير على وقت تناول وجبتك المعتاد." },
+    { text: "We suggest that you recall if you had similar situations when using Keeta takeout before. We will also submit your account for review, which may take some time. If you need a meal urgently, it is recommended that you change another phone number or account, or order with friends. Don't let it affect your normal mealtime." },
+    { text: "عزيزي العميل، لاحظنا أنك قمت بالإبلاغ عن مشكلات استرداد الأموال بشكل متكرر مؤخرًا (يمكن تحديد عدد الطلبات والإلغاءات مع الأوقات المحددة). نفترض أنك طلبت الطعام للاستهلاك الشخصي. هل هناك أي سبب لحدوث ذلك بشكل متكرر؟" },
+    { text: "Dear valued customer, I noticed that you have been reporting refund issues frequently recently(can specify the number of orders placements and cancellations with the exact times). We assume you ordered the food for personal consumption. Is there any reason for such frequent occurrences?" },
+    { text: "تفرض المنصة متطلبات صارمة على الطهي والتعبئة للتجار من أجل حماية حقوق المستخدمين. في كل مرة تقوم فيها بتقديم طلب، يقوم التاجر بتحضير الوجبة. يمكن تفهم حدوث حوادث عرضية، ولكن التكرار المتكرر كما ذكرت قد لا يكون أمرًا معقولًا." },
+    { text: "The platform has imposed strict cooking and packing requirements to merchants to protect the users' rights. Every time you place an order, the merchant prepares the meal. Occasional incidents can be understood, but frequent ones like you mentioned might not be reasonable." },
+    { text: "إذا كنت تاجرًا، فمن المحتمل أنك لن ترغب في أن يقوم المستخدمون بتقديم الطلبات في متجرك ثم إلغائها على الفور بشكل متكرر. فبالنهاية، هناك تكاليف تُنفق على تحضير الوجبات، أليس كذلك؟ نحن نتفهم قلقك بشأن عدم القدرة على تقديم طلب، ولكن يجب على المنصة أيضًا حماية مصالح التجار. إذا كنت بحاجة إلى وجبة بشكل عاجل، يُفضل البحث عن طرق بديلة لتناول الطعام أولًا." },
+    { text: "If you are a merchant, you probably wouldn't want users to frequently place orders at your place and then cancel them immediately. After all, there are costs for preparing the meals, right? We understand your anxiety about not being able to place an order, but the platform also should protect the interests of merchants. If you are in a hurry to have a meal, it is suggested that you can also choose other ways to have a meal first." },
+    { text: "نوصي بشدة بأن تستهلك بشكل معقول في المستقبل. قبل تقديم الطلب، يمكنك التحقق مسبقًا من المعلومات ذات الصلة لتجنب أي إزعاج لك." },
+    { text: "We highly recommend that you consume reasonably in the future. Before placing an order, you can check the relevant information in advance to avoid inconvenience to you." },
+    { text: "سنقوم بإرسال حسابك للمراجعة، وقد يستغرق ذلك بعض الوقت. إذا كنت بحاجة إلى وجبة بشكل عاجل، فمن الأفضل استخدام رقم هاتف أو حساب آخر أو الطلب مع الأصدقاء، حيث لا نرغب في تأخير وقت وجبتك المعتاد. في حال تمت مراجعة حسابك ولم يتم العثور على أي مخالفات، سنعمل على استعادة حقوق حسابك في أقرب وقت ممكن. نعتذر عن أي إزعاج." },
+    { text: "We will submit your account for review, it may take some time. If you need a meal urgently, it's best to change your phone number or account or order with friends. We don't wish to delay your normal meal time. If we review your account and find no abnormalities later, we will restore your account rights as soon as possible. We apologize for the inconvenience." },
+  ];
+
   const renderContent = () => {
     if (selectedCategory === "basic") {
       return (
@@ -117,7 +134,7 @@ const Apologies = () => {
             Back
           </Button>
           {basicApologies.map((message, index) => (
-            <MessageBox key={index} text={message.text} category="" />
+            <MessageBox key={index} text={message.text} category="" number={index + 1} />
           ))}
         </>
       );
@@ -135,7 +152,7 @@ const Apologies = () => {
             Back
           </Button>
           {specialCaseApologies.map((message, index) => (
-            <MessageBox key={index} text={message.text} category="" />
+            <MessageBox key={index} text={message.text} category="" number={index + 1} />
           ))}
         </>
       );
@@ -153,7 +170,7 @@ const Apologies = () => {
             Back
           </Button>
           {handlingCustomer.map((message, index) => (
-            <MessageBox key={index} text={message.text} category="" />
+            <MessageBox key={index} text={message.text} category="" number={index + 1} />
           ))}
         </>
       );
@@ -171,7 +188,25 @@ const Apologies = () => {
             Back
           </Button>
           {fullApologies.map((message, index) => (
-            <MessageBox key={index} text={message.text} category="" />
+            <MessageBox key={index} text={message.text} category="" number={index + 1} />
+          ))}
+        </>
+      );
+    }
+
+    if (selectedCategory === "purple") {
+      return (
+        <>
+          <Button
+            variant="outline"
+            onClick={() => setSelectedCategory(null)}
+            className="mb-4"
+          >
+            <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+            Back
+          </Button>
+          {purpleApologies.map((message, index) => (
+            <MessageBox key={index} text={message.text} category="" number={index + 1} />
           ))}
         </>
       );
@@ -183,6 +218,11 @@ const Apologies = () => {
         <CategoryBox title="Special case apologies" onClick={() => setSelectedCategory("special")} />
         <CategoryBox title="Handling the customer" onClick={() => setSelectedCategory("handling")} />
         <CategoryBox title="Full apologies" onClick={() => setSelectedCategory("full")} />
+        <CategoryBox 
+          title="Purple" 
+          subtitle="Can't place an order"
+          onClick={() => setSelectedCategory("purple")} 
+        />
       </div>
     );
   };
@@ -192,6 +232,7 @@ const Apologies = () => {
     if (selectedCategory === "special") return "Special case apologies";
     if (selectedCategory === "handling") return "Handling the customer";
     if (selectedCategory === "full") return "Full apologies";
+    if (selectedCategory === "purple") return "Purple - Can't place an order";
     return "Apologies Messages";
   };
 
