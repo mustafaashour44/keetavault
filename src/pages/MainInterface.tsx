@@ -18,7 +18,7 @@ const MainInterface = () => {
 
   // Auto-translate when source text or languages change
   useEffect(() => {
-    const translateText = async () => {
+    const translateText = async (retryCount = 0) => {
       if (!sourceText.trim()) {
         setTargetText("");
         return;
@@ -36,30 +36,40 @@ const MainInterface = () => {
 
         if (error) {
           console.error("Translation error:", error);
+          
+          // Retry once silently if it's the first attempt
+          if (retryCount === 0) {
+            setTimeout(() => translateText(1), 300);
+            return;
+          }
+          
+          // Only show error toast on second failure
           toast({
-            title: "Translation Error",
-            description: "Failed to translate text. Please try again.",
+            title: "خطأ في الترجمة / Translation Error",
+            description: "يرجى المحاولة مرة أخرى / Please try again",
             variant: "destructive",
           });
+          setIsTranslating(false);
           return;
         }
 
         setTargetText(data.translatedText);
       } catch (error) {
         console.error("Translation error:", error);
-        toast({
-          title: "Translation Error",
-          description: "An unexpected error occurred.",
-          variant: "destructive",
-        });
+        
+        // Retry once silently
+        if (retryCount === 0) {
+          setTimeout(() => translateText(1), 300);
+          return;
+        }
       } finally {
         setIsTranslating(false);
       }
     };
 
-    const debounceTimer = setTimeout(translateText, 500);
+    const debounceTimer = setTimeout(() => translateText(), 200);
     return () => clearTimeout(debounceTimer);
-  }, [sourceText, sourceLang, targetLang]);
+  }, [sourceText, sourceLang, targetLang, toast]);
 
   const handleSwapLanguages = () => {
     setSourceLang(targetLang);
