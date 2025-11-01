@@ -51,7 +51,7 @@ const Sidebar = () => {
       </nav>
       
       <div className="absolute bottom-4 left-6 text-xs text-muted-foreground">
-        Quick Replies v1.0
+        Quick Replies v1.1
       </div>
     </aside>
   );
