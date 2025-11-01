@@ -21,6 +21,7 @@ const MainInterface = () => {
     const translateText = async (retryCount = 0) => {
       if (!sourceText.trim()) {
         setTargetText("");
+        setIsTranslating(false);
         return;
       }
 
@@ -37,39 +38,37 @@ const MainInterface = () => {
         if (error) {
           console.error("Translation error:", error);
           
-          // Retry once silently if it's the first attempt
-          if (retryCount === 0) {
-            setTimeout(() => translateText(1), 300);
+          // Retry up to 3 times silently
+          if (retryCount < 3) {
+            setTimeout(() => translateText(retryCount + 1), 500);
             return;
           }
           
-          // Only show error toast on second failure
-          toast({
-            title: "خطأ في الترجمة / Translation Error",
-            description: "يرجى المحاولة مرة أخرى / Please try again",
-            variant: "destructive",
-          });
+          // Keep previous translation and hide loading
           setIsTranslating(false);
           return;
         }
 
-        setTargetText(data.translatedText);
+        if (data?.translatedText) {
+          setTargetText(data.translatedText);
+        }
+        setIsTranslating(false);
       } catch (error) {
         console.error("Translation error:", error);
         
-        // Retry once silently
-        if (retryCount === 0) {
-          setTimeout(() => translateText(1), 300);
+        // Retry up to 3 times silently
+        if (retryCount < 3) {
+          setTimeout(() => translateText(retryCount + 1), 500);
           return;
         }
-      } finally {
+        
         setIsTranslating(false);
       }
     };
 
-    const debounceTimer = setTimeout(() => translateText(), 200);
+    const debounceTimer = setTimeout(() => translateText(), 150);
     return () => clearTimeout(debounceTimer);
-  }, [sourceText, sourceLang, targetLang, toast]);
+  }, [sourceText, sourceLang, targetLang]);
 
   const handleSwapLanguages = () => {
     setSourceLang(targetLang);
