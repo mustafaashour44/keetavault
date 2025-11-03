@@ -214,9 +214,11 @@ const MainInterface = () => {
         </div>
       </Card>
 
-      {/* Case Solution Section */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Case Solution</h2>
+      {/* Case Soulotion and System Links Row */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Case Soulotion Section */}
+        <Card className="p-6">
+          <h2 className="text-xl font-semibold mb-4">Case Soulotion</h2>
         
         <div className="space-y-4">
           {/* Call */}
@@ -349,26 +351,27 @@ const MainInterface = () => {
             </pre>
           </div>
         </div>
-      </Card>
+        </Card>
 
-      {/* System Links Section */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-4">System Links</h2>
-        <div className="grid gap-2">
-          {systemLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-2 rounded-lg border border-border hover:bg-accent/50 transition-colors group text-sm"
-            >
-              <span className="font-medium">{link.name}</span>
-              <ExternalLink className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
-            </a>
-          ))}
-        </div>
-      </Card>
+        {/* System Links Section */}
+        <Card className="p-6">
+          <h2 className="text-xl font-semibold mb-4">System Links</h2>
+          <div className="grid gap-1.5">
+            {systemLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-1.5 rounded-lg border border-border hover:bg-accent/50 transition-colors group text-xs"
+              >
+                <span className="font-medium">{link.name}</span>
+                <ExternalLink className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              </a>
+            ))}
+          </div>
+        </Card>
+      </div>
     </PageLayout>
   );
 };
