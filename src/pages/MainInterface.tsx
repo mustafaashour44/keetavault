@@ -216,143 +216,6 @@ const MainInterface = () => {
 
       {/* Case Soulotion and System Links Row */}
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Case Soulotion Section */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Case Soulotion</h2>
-        
-        <div className="space-y-4">
-          {/* Call */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Call</label>
-            <Select value={callOption} onValueChange={(val) => {
-              setCallOption(val);
-              if (val === "no need") setCallNote("");
-            }}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="no need">No need</SelectItem>
-                <SelectItem value="Merchant">Merchant</SelectItem>
-                <SelectItem value="Rider">Rider</SelectItem>
-              </SelectContent>
-            </Select>
-            {(callOption === "Merchant" || callOption === "Rider") && (
-              <Textarea
-                value={callNote}
-                onChange={(e) => setCallNote(e.target.value)}
-                placeholder="نتيجة المكالمة / Call result..."
-                className="min-h-[80px]"
-              />
-            )}
-          </div>
-
-          {/* Risk Label */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Risk Label</label>
-            <Select value={riskLabel} onValueChange={setRiskLabel}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0RC">0RC</SelectItem>
-                <SelectItem value="1RC">1RC</SelectItem>
-                <SelectItem value="2RC">2RC</SelectItem>
-                <SelectItem value="3RC">3RC</SelectItem>
-                <SelectItem value=">3RC">&gt;3RC</SelectItem>
-                <SelectItem value="RED">RED</SelectItem>
-                <SelectItem value="Purple">Purple</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Evidence */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Evidence</label>
-            <Select value={evidence} onValueChange={setEvidence}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="no need">No need</SelectItem>
-                <SelectItem value="Clear">Clear</SelectItem>
-                <SelectItem value="Unclear">Unclear</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Receipt */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Receipt</label>
-            <Select value={receipt} onValueChange={setReceipt}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="No need">No need</SelectItem>
-                <SelectItem value="Yes">Yes</SelectItem>
-                <SelectItem value="No">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Refund */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Refund</label>
-            <Select value={refund} onValueChange={setRefund}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="No refund">No refund</SelectItem>
-                <SelectItem value="Partial Refund">Partial Refund</SelectItem>
-                <SelectItem value="Full Refund">Full Refund</SelectItem>
-              </SelectContent>
-            </Select>
-            {(refund === "Partial Refund" || refund === "Full Refund") && (
-              <input
-                type="text"
-                value={refundAmount}
-                onChange={(e) => setRefundAmount(e.target.value)}
-                placeholder="المبلغ / Amount..."
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-            )}
-          </div>
-
-          {/* Compensation */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Compensation</label>
-            <Select value={compensation} onValueChange={setCompensation}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="no compensation">No Compensation</SelectItem>
-                <SelectItem value="Compensation">Compensation</SelectItem>
-                <SelectItem value="Compensation as a voucher">Compensation as a voucher</SelectItem>
-              </SelectContent>
-            </Select>
-            {(compensation === "Compensation" || compensation === "Compensation as a voucher") && (
-              <input
-                type="text"
-                value={compensationAmount}
-                onChange={(e) => setCompensationAmount(e.target.value)}
-                placeholder="المبلغ / Amount..."
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-            )}
-          </div>
-
-          {/* Generated Result */}
-          <div className="mt-6 p-4 rounded-lg border border-border bg-muted/30 cursor-pointer hover:bg-muted/50 transition-colors" onClick={handleCopyCaseSolution}>
-            <pre className="text-sm whitespace-pre-wrap select-all" dir="ltr">
-              {generateCaseSolution()}
-            </pre>
-          </div>
-        </div>
-        </Card>
-
         {/* System Links Section */}
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">System Links</h2>
@@ -369,6 +232,143 @@ const MainInterface = () => {
                 <ExternalLink className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
               </a>
             ))}
+          </div>
+        </Card>
+
+        {/* Case Soulotion Section */}
+        <Card className="p-6">
+          <h2 className="text-xl font-semibold mb-4">Case Soulotion</h2>
+        
+          <div className="space-y-4">
+            {/* Call */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Call</label>
+              <Select value={callOption} onValueChange={(val) => {
+                setCallOption(val);
+                if (val === "no need") setCallNote("");
+              }}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no need">No need</SelectItem>
+                  <SelectItem value="Merchant">Merchant</SelectItem>
+                  <SelectItem value="Rider">Rider</SelectItem>
+                </SelectContent>
+              </Select>
+              {(callOption === "Merchant" || callOption === "Rider") && (
+                <Textarea
+                  value={callNote}
+                  onChange={(e) => setCallNote(e.target.value)}
+                  placeholder="نتيجة المكالمة / Call result..."
+                  className="min-h-[80px]"
+                />
+              )}
+            </div>
+
+            {/* Risk Label */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Risk Label</label>
+              <Select value={riskLabel} onValueChange={setRiskLabel}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0RC">0RC</SelectItem>
+                  <SelectItem value="1RC">1RC</SelectItem>
+                  <SelectItem value="2RC">2RC</SelectItem>
+                  <SelectItem value="3RC">3RC</SelectItem>
+                  <SelectItem value=">3RC">&gt;3RC</SelectItem>
+                  <SelectItem value="RED">RED</SelectItem>
+                  <SelectItem value="Purple">Purple</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Evidence */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Evidence</label>
+              <Select value={evidence} onValueChange={setEvidence}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no need">No need</SelectItem>
+                  <SelectItem value="Clear">Clear</SelectItem>
+                  <SelectItem value="Unclear">Unclear</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Receipt */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Receipt</label>
+              <Select value={receipt} onValueChange={setReceipt}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="No need">No need</SelectItem>
+                  <SelectItem value="Yes">Yes</SelectItem>
+                  <SelectItem value="No">No</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Refund */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Refund</label>
+              <Select value={refund} onValueChange={setRefund}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="No refund">No refund</SelectItem>
+                  <SelectItem value="Partial Refund">Partial Refund</SelectItem>
+                  <SelectItem value="Full Refund">Full Refund</SelectItem>
+                </SelectContent>
+              </Select>
+              {(refund === "Partial Refund" || refund === "Full Refund") && (
+                <input
+                  type="text"
+                  value={refundAmount}
+                  onChange={(e) => setRefundAmount(e.target.value)}
+                  placeholder="المبلغ / Amount..."
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              )}
+            </div>
+
+            {/* Compensation */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Compensation</label>
+              <Select value={compensation} onValueChange={setCompensation}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no compensation">No Compensation</SelectItem>
+                  <SelectItem value="Compensation">Compensation</SelectItem>
+                  <SelectItem value="Compensation as a voucher">Compensation as a voucher</SelectItem>
+                </SelectContent>
+              </Select>
+              {(compensation === "Compensation" || compensation === "Compensation as a voucher") && (
+                <input
+                  type="text"
+                  value={compensationAmount}
+                  onChange={(e) => setCompensationAmount(e.target.value)}
+                  placeholder="المبلغ / Amount..."
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              )}
+            </div>
+
+            {/* Generated Result */}
+            <div className="mt-6 p-4 rounded-lg border border-border bg-muted/30 cursor-pointer hover:bg-muted/50 transition-colors" onClick={handleCopyCaseSolution}>
+              <pre className="text-sm whitespace-pre-wrap select-all" dir="ltr">
+                {generateCaseSolution()}
+              </pre>
+            </div>
           </div>
         </Card>
       </div>
