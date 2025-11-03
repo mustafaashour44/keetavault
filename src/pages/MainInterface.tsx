@@ -149,8 +149,8 @@ const MainInterface = () => {
   return (
     <PageLayout title="Main Interface" description="Translation tool and system links">
       {/* Translation Section */}
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-4">الترجمة / Translation</h2>
+      <Card className="p-4">
+        <h2 className="text-lg font-semibold mb-3">الترجمة / Translation</h2>
         
         <div className="flex items-start gap-4">
           {/* Source Language */}
@@ -217,8 +217,8 @@ const MainInterface = () => {
       {/* Case Soulotion and System Links Row */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* System Links Section */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">System Links</h2>
+        <Card className="p-4">
+          <h2 className="text-lg font-semibold mb-3">System Links</h2>
           <div className="grid gap-2.5">
             {systemLinks.map((link) => (
               <a
@@ -236,8 +236,8 @@ const MainInterface = () => {
         </Card>
 
         {/* Case Soulotion Section */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Case Soulotion</h2>
+        <Card className="p-4">
+          <h2 className="text-lg font-semibold mb-3">Case Soulotion</h2>
         
           <div className="space-y-4">
             {/* Call */}

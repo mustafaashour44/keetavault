@@ -25,7 +25,7 @@ const Sidebar = () => {
     <aside className="fixed left-0 top-0 h-screen w-52 border-r border-sidebar-border bg-sidebar-background">
       <div className="p-6 border-b border-sidebar-border">
         <h1 className="text-xl font-bold text-primary mb-1">Keeta Vault</h1>
-        <p className="text-xs text-muted-foreground">Made By TR Mustafa Ashour</p>
+        <p className="text-sm text-muted-foreground font-medium">Made By TR Mustafa Ashour</p>
       </div>
       
       <nav className="p-3">
