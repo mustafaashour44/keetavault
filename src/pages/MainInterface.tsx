@@ -219,17 +219,17 @@ const MainInterface = () => {
         {/* System Links Section */}
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">System Links</h2>
-          <div className="grid gap-1.5">
+          <div className="grid gap-2.5">
             {systemLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-1.5 rounded-lg border border-border hover:bg-accent/50 transition-colors group text-xs"
+                className="flex items-center justify-between p-2.5 rounded-lg border border-border hover:bg-accent/50 transition-colors group text-sm"
               >
                 <span className="font-medium">{link.name}</span>
-                <ExternalLink className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </a>
             ))}
           </div>
