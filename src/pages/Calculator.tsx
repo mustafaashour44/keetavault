@@ -43,7 +43,7 @@ const Calculator = () => {
       title="Missing & Wrong Calculator"
       description="Quick compensation calculator for missing & wrong items."
     >
-      <div className="bg-card border border-border rounded-lg p-6 max-w-2xl">
+      <div className="bg-card border border-border rounded-lg p-6 max-w-2xl mx-auto">
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-2">Order Price (SAR)</label>
