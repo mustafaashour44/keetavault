@@ -16,59 +16,47 @@ const MainInterface = () => {
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
 
-  // Auto-translate when source text or languages change
-  useEffect(() => {
-    const translateText = async (retryCount = 0) => {
-      if (!sourceText.trim()) {
-        setTargetText("");
+  const handleTranslate = async () => {
+    if (!sourceText.trim()) {
+      setTargetText("");
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("translate", {
+        body: {
+          text: sourceText,
+          sourceLang,
+          targetLang,
+        },
+      });
+
+      if (error) {
+        console.error("Translation error:", error);
+        toast({
+          title: "خطأ / Error",
+          description: "فشلت الترجمة / Translation failed",
+          variant: "destructive",
+        });
         setIsTranslating(false);
         return;
       }
 
-      setIsTranslating(true);
-      try {
-        const { data, error } = await supabase.functions.invoke("translate", {
-          body: {
-            text: sourceText,
-            sourceLang,
-            targetLang,
-          },
-        });
-
-        if (error) {
-          console.error("Translation error:", error);
-          
-          // Retry up to 3 times silently
-          if (retryCount < 3) {
-            setTimeout(() => translateText(retryCount + 1), 500);
-            return;
-          }
-          
-          // Keep previous translation and hide loading
-          setIsTranslating(false);
-          return;
-        }
-
-        if (data?.translatedText) {
-          setTargetText(data.translatedText);
-        }
-        setIsTranslating(false);
-      } catch (error) {
-        console.error("Translation error:", error);
-        
-        // Retry up to 3 times silently
-        if (retryCount < 3) {
-          setTimeout(() => translateText(retryCount + 1), 500);
-          return;
-        }
-        
-        setIsTranslating(false);
+      if (data?.translatedText) {
+        setTargetText(data.translatedText);
       }
-    };
-
-    const debounceTimer = setTimeout(() => translateText(), 150);
-    return () => clearTimeout(debounceTimer);
-  }, [sourceText, sourceLang, targetLang]);
+      setIsTranslating(false);
+    } catch (error) {
+      console.error("Translation error:", error);
+      toast({
+        title: "خطأ / Error",
+        description: "فشلت الترجمة / Translation failed",
+        variant: "destructive",
+      });
+      setIsTranslating(false);
+    }
+  };
 
   const handleSwapLanguages = () => {
     setSourceLang(targetLang);
@@ -147,69 +135,85 @@ const MainInterface = () => {
   ];
 
   return (
-    <PageLayout title="Main Interface" description="Translation tool and system links">
+    <PageLayout title="Main Interface">
       {/* Translation Section */}
       <Card className="p-4">
         <h2 className="text-lg font-semibold mb-3">الترجمة / Translation</h2>
         
-        <div className="flex items-start gap-4">
-          {/* Source Language */}
-          <div className="flex-1 space-y-2">
-            <Select value={sourceLang} onValueChange={setSourceLang}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ar">العربية</SelectItem>
-                <SelectItem value="en">English</SelectItem>
-              </SelectContent>
-            </Select>
-            <Textarea
-              value={sourceText}
-              onChange={(e) => setSourceText(e.target.value)}
-              onClick={() => handleCopyText(sourceText)}
-              placeholder={sourceLang === "ar" ? "إدخال نص..." : "Enter text..."}
-              className="min-h-[150px] resize-none cursor-pointer"
-              title="انقر للنسخ / Click to copy"
-            />
-          </div>
+        <div className="space-y-3">
+          <div className="flex items-start gap-4">
+            {/* Source Language */}
+            <div className="flex-1 space-y-2">
+              <Select value={sourceLang} onValueChange={setSourceLang}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ar">العربية</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+              <Textarea
+                value={sourceText}
+                onChange={(e) => setSourceText(e.target.value)}
+                onClick={() => handleCopyText(sourceText)}
+                placeholder={sourceLang === "ar" ? "إدخال نص..." : "Enter text..."}
+                className="min-h-[150px] resize-none cursor-pointer"
+                title="انقر للنسخ / Click to copy"
+              />
+            </div>
 
-          {/* Swap Button */}
-          <div className="flex items-center pt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleSwapLanguages}
-              disabled={isTranslating}
-              className="rounded-full"
+            {/* Swap Button */}
+            <div className="flex items-center pt-8">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleSwapLanguages}
+                disabled={isTranslating}
+                className="rounded-full"
+              >
+                <ArrowLeftRight className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Target Language */}
+            <div className="flex-1 space-y-2">
+              <Select value={targetLang} onValueChange={setTargetLang}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ar">العربية</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+              <Textarea
+                value={targetText}
+                readOnly
+                onClick={() => handleCopyText(targetText)}
+                placeholder={targetLang === "ar" ? "الترجمة..." : "Translation..."}
+                className="min-h-[150px] resize-none bg-muted/30 cursor-pointer"
+                title="انقر للنسخ / Click to copy"
+              />
+            </div>
+          </div>
+          
+          {/* Translate Button */}
+          <div className="flex justify-center">
+            <Button 
+              onClick={handleTranslate}
+              disabled={isTranslating || !sourceText.trim()}
+              className="min-w-[200px]"
             >
               {isTranslating ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  جارٍ الترجمة... / Translating...
+                </>
               ) : (
-                <ArrowLeftRight className="h-4 w-4" />
+                "ترجم / Translate"
               )}
             </Button>
-          </div>
-
-          {/* Target Language */}
-          <div className="flex-1 space-y-2">
-            <Select value={targetLang} onValueChange={setTargetLang}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ar">العربية</SelectItem>
-                <SelectItem value="en">English</SelectItem>
-              </SelectContent>
-            </Select>
-            <Textarea
-              value={targetText}
-              readOnly
-              onClick={() => handleCopyText(targetText)}
-              placeholder={targetLang === "ar" ? "الترجمة..." : "Translation..."}
-              className="min-h-[150px] resize-none bg-muted/30 cursor-pointer"
-              title="انقر للنسخ / Click to copy"
-            />
           </div>
         </div>
       </Card>
