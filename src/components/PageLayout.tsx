@@ -13,7 +13,7 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
       <div className="max-w-5xl mx-auto p-8">
         <SaudiClock />
         
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-foreground mb-2">{title}</h1>
           {description && <p className="text-muted-foreground">{description}</p>}
         </div>
