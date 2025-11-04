@@ -40,7 +40,7 @@ const Calculator = () => {
 
   return (
     <PageLayout
-      title="Missing & Wrong Calculator"
+      title="Calculator"
       description="Quick compensation calculator for missing & wrong items."
     >
       <div className="bg-card border border-border rounded-lg p-6 max-w-2xl mx-auto">
