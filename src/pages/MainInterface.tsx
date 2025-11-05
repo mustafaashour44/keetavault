@@ -110,6 +110,11 @@ const MainInterface = () => {
     });
   };
 
+  const handleReset = () => {
+    setSourceText("");
+    setTargetText("");
+  };
+
   const [callOption, setCallOption] = useState("no need");
   const [callNote, setCallNote] = useState("");
   const [riskLabel, setRiskLabel] = useState("0RC");
@@ -224,8 +229,8 @@ const MainInterface = () => {
             </div>
           </div>
           
-          {/* Translate Button */}
-          <div className="flex justify-center">
+          {/* Translate and Reset Buttons */}
+          <div className="flex justify-center gap-3">
             <Button 
               onClick={handleTranslate}
               disabled={isTranslating || !sourceText.trim()}
@@ -239,6 +244,13 @@ const MainInterface = () => {
               ) : (
                 "ترجم / Translate"
               )}
+            </Button>
+            <Button 
+              onClick={handleReset}
+              variant="outline"
+              disabled={isTranslating}
+            >
+              إعادة تعيين / Reset
             </Button>
           </div>
         </div>
