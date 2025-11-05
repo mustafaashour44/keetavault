@@ -32,10 +32,9 @@ serve(async (req) => {
     const systemPrompt = `You are a professional translator. Translate the text from ${sourceLangName} to ${targetLangName}.
     
 IMPORTANT TRANSLATION RULES:
-- NEVER translate these words, keep them exactly as they are:
-  - "كيتا" must stay as "كيتا" (do NOT translate to Keeta)
-  - "Keeta" must stay as "Keeta" (do NOT translate to كيتا)
-- Always translate:
+- Always translate these terms:
+  - كيتا → Keeta
+  - Keeta → كيتا
   - عميل/العميل → Customer
   - Customer → عميل
   - مطعم/المطعم → Merchant
