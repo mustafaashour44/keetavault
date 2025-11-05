@@ -9,40 +9,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const MainInterface = () => {
-  const [sourceText, setSourceText] = useState(() => {
-    const saved = localStorage.getItem("translation_sourceText");
-    return saved || "";
-  });
-  const [targetText, setTargetText] = useState(() => {
-    const saved = localStorage.getItem("translation_targetText");
-    return saved || "";
-  });
-  const [sourceLang, setSourceLang] = useState(() => {
-    const saved = localStorage.getItem("translation_sourceLang");
-    return saved || "ar";
-  });
-  const [targetLang, setTargetLang] = useState(() => {
-    const saved = localStorage.getItem("translation_targetLang");
-    return saved || "en";
-  });
+  const [sourceText, setSourceText] = useState("");
+  const [targetText, setTargetText] = useState("");
+  const [sourceLang, setSourceLang] = useState("ar");
+  const [targetLang, setTargetLang] = useState("en");
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
-
-  useEffect(() => {
-    localStorage.setItem("translation_sourceText", sourceText);
-  }, [sourceText]);
-
-  useEffect(() => {
-    localStorage.setItem("translation_targetText", targetText);
-  }, [targetText]);
-
-  useEffect(() => {
-    localStorage.setItem("translation_sourceLang", sourceLang);
-  }, [sourceLang]);
-
-  useEffect(() => {
-    localStorage.setItem("translation_targetLang", targetLang);
-  }, [targetLang]);
 
   const handleTranslate = async () => {
     if (!sourceText.trim()) {

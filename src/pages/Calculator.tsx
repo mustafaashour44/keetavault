@@ -6,34 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calculator as CalcIcon } from "lucide-react";
 
 const Calculator = () => {
-  const [orderPrice, setOrderPrice] = useState(() => {
-    const saved = localStorage.getItem("calculator_orderPrice");
-    return saved || "";
-  });
-  const [itemType, setItemType] = useState(() => {
-    const saved = localStorage.getItem("calculator_itemType");
-    return saved || "main";
-  });
-  const [result, setResult] = useState<number | null>(() => {
-    const saved = localStorage.getItem("calculator_result");
-    return saved ? parseFloat(saved) : null;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("calculator_orderPrice", orderPrice);
-  }, [orderPrice]);
-
-  useEffect(() => {
-    localStorage.setItem("calculator_itemType", itemType);
-  }, [itemType]);
-
-  useEffect(() => {
-    if (result !== null) {
-      localStorage.setItem("calculator_result", result.toString());
-    } else {
-      localStorage.removeItem("calculator_result");
-    }
-  }, [result]);
+  const [orderPrice, setOrderPrice] = useState("");
+  const [itemType, setItemType] = useState("main");
+  const [result, setResult] = useState<number | null>(null);
 
   const calculateCompensation = () => {
     const price = parseFloat(orderPrice);
