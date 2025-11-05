@@ -184,10 +184,8 @@ const MainInterface = () => {
               <Textarea
                 value={sourceText}
                 onChange={(e) => setSourceText(e.target.value)}
-                onClick={() => handleCopyText(sourceText)}
                 placeholder={sourceLang === "ar" ? "إدخال نص..." : "Enter text..."}
-                className="min-h-[150px] resize-none cursor-pointer"
-                title="انقر للنسخ / Click to copy"
+                className="min-h-[150px] resize-none"
               />
             </div>
 
