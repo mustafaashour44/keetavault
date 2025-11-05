@@ -93,7 +93,14 @@ Provide ONLY the translation without any explanations or additional text.`;
       }
 
       const data = await response.json();
-      const translatedText = data.choices[0].message.content;
+      let translatedText = data.choices[0].message.content;
+
+      // Deterministic term normalization for brand name
+      if (targetLang === "en") {
+        translatedText = translatedText.replace(/كيتا/g, "Keeta");
+      } else if (targetLang === "ar") {
+        translatedText = translatedText.replace(/keeta/gi, "كيتا");
+      }
 
       console.log("Translation successful:", translatedText);
 
