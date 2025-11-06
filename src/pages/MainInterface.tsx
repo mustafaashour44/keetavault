@@ -117,7 +117,8 @@ const MainInterface = () => {
 
   const [callOption, setCallOption] = useState("no need");
   const [callNote, setCallNote] = useState("");
-  const [riskLabel, setRiskLabel] = useState("0RC");
+  const [rcLabel, setRcLabel] = useState("0RC");
+  const [colorLabel, setColorLabel] = useState("None");
   const [evidence, setEvidence] = useState("no need");
   const [receipt, setReceipt] = useState("No need");
   const [refund, setRefund] = useState("No refund");
@@ -134,7 +135,8 @@ const MainInterface = () => {
       result += `${callOption}${callNote ? ` - ${callNote}` : ""}\n`;
     }
     
-    result += `Case Solution Risk Label: ${riskLabel}\n`;
+    const riskLabelValue = colorLabel !== "None" ? `${rcLabel} / ${colorLabel}` : rcLabel;
+    result += `Case Solution Risk Label: ${riskLabelValue}\n`;
     result += `Evidence: ${evidence}\n`;
     result += `Receipt: ${receipt}\n`;
     result += `Refund: ${refund}${refundAmount ? ` (${refundAmount})` : ""}\n`;
@@ -311,30 +313,30 @@ const MainInterface = () => {
             {/* Risk Label */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Risk Label</label>
-              <Select value={riskLabel} onValueChange={setRiskLabel}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0RC">0RC</SelectItem>
-                  <SelectItem value="1RC">1RC</SelectItem>
-                  <SelectItem value="2RC">2RC</SelectItem>
-                  <SelectItem value="3RC">3RC</SelectItem>
-                  <SelectItem value=">3RC">&gt;3RC</SelectItem>
-                  <SelectItem value="0RC / RED">0RC / RED</SelectItem>
-                  <SelectItem value="1RC / RED">1RC / RED</SelectItem>
-                  <SelectItem value="2RC / RED">2RC / RED</SelectItem>
-                  <SelectItem value="3RC / RED">3RC / RED</SelectItem>
-                  <SelectItem value=">3RC / RED">&gt;3RC / RED</SelectItem>
-                  <SelectItem value="0RC / Purple">0RC / Purple</SelectItem>
-                  <SelectItem value="1RC / Purple">1RC / Purple</SelectItem>
-                  <SelectItem value="2RC / Purple">2RC / Purple</SelectItem>
-                  <SelectItem value="3RC / Purple">3RC / Purple</SelectItem>
-                  <SelectItem value=">3RC / Purple">&gt;3RC / Purple</SelectItem>
-                  <SelectItem value="RED">RED</SelectItem>
-                  <SelectItem value="Purple">Purple</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="grid grid-cols-2 gap-2">
+                <Select value={rcLabel} onValueChange={setRcLabel}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0RC">0RC</SelectItem>
+                    <SelectItem value="1RC">1RC</SelectItem>
+                    <SelectItem value="2RC">2RC</SelectItem>
+                    <SelectItem value="3RC">3RC</SelectItem>
+                    <SelectItem value=">3RC">&gt;3RC</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={colorLabel} onValueChange={setColorLabel}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="None">None</SelectItem>
+                    <SelectItem value="RED">RED</SelectItem>
+                    <SelectItem value="Purple">Purple</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             {/* Evidence */}
