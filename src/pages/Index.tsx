@@ -1,13 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useNavigate } from "react-router-dom";
+import CategoryBox from "@/components/CategoryBox";
+import PageLayout from "@/components/PageLayout";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <PageLayout title="Select Department">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <CategoryBox
+          title="C-Side"
+          onClick={() => navigate("/main-interface")}
+        />
+        <CategoryBox
+          title="BD-Side"
+          onClick={() => navigate("/bd-side")}
+        />
+        <CategoryBox
+          title="Calls"
+          onClick={() => navigate("/calls")}
+        />
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

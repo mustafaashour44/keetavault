@@ -4,7 +4,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
+import Index from "./pages/Index";
 import MainInterface from "./pages/MainInterface";
+import BDSide from "./pages/BDSide";
+import Calls from "./pages/Calls";
 import Calculator from "./pages/Calculator";
 import Greeting from "./pages/Greeting";
 import Confirming from "./pages/Confirming";
@@ -30,8 +33,11 @@ const App = () => (
       <BrowserRouter>
         <Sidebar />
         <Routes>
+          <Route path="/" element={<Index />} />
           <Route path="/main-interface" element={<MainInterface />} />
-          <Route path="/" element={<Calculator />} />
+          <Route path="/bd-side" element={<BDSide />} />
+          <Route path="/calls" element={<Calls />} />
+          <Route path="/calculator" element={<Calculator />} />
           <Route path="/greeting" element={<Greeting />} />
           <Route path="/confirming" element={<Confirming />} />
           <Route path="/hold" element={<Hold />} />
