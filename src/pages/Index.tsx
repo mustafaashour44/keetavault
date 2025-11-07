@@ -11,7 +11,7 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <CategoryBox
             title="C-Side"
-            onClick={() => navigate("/calculator")}
+            onClick={() => navigate("/main-interface")}
           />
           <CategoryBox
             title="BD-Side"
