@@ -1,30 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import CategoryBox from "@/components/CategoryBox";
+// Update this page (the content is just a fallback if you fail to update the page)
 
 const Index = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="max-w-5xl w-full px-6">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-2">Keeta Vault</h1>
-          <p className="text-muted-foreground">Select Department</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <CategoryBox
-            title="C-Side"
-            onClick={() => navigate("/main-interface")}
-          />
-          <CategoryBox
-            title="BD-Side"
-            onClick={() => navigate("/bd-side")}
-          />
-          <CategoryBox
-            title="Calls"
-            onClick={() => navigate("/calls")}
-          />
-        </div>
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
+        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
       </div>
     </div>
   );
