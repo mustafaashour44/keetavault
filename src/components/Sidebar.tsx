@@ -6,7 +6,7 @@ const Sidebar = () => {
   
   const menuItems = [
     { path: "/main-interface", icon: Home, label: "Main Interface" },
-    { path: "/", icon: Calculator, label: "Calculator" },
+    { path: "/calculator", icon: Calculator, label: "Calculator" },
     { path: "/greeting", icon: MessageSquare, label: "Greeting" },
     { path: "/confirming", icon: CheckCircle, label: "Confirming" },
     { path: "/hold", icon: Clock, label: "Hold" },
@@ -51,7 +51,7 @@ const Sidebar = () => {
       </nav>
       
       <div className="absolute bottom-4 left-6 text-xs text-muted-foreground">
-        Quick Replies v1.1
+        Quick Replies v1.2
       </div>
     </aside>
   );
